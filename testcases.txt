@@ -1,0 +1,39 @@
+Workload Descriptions: 
+
+1. Workload D
+
+    malloc 10, 20, 30, 40, 40 into memories with each returning a pointer
+    free pointers containing 20, 30, 40 bytes in the memory.
+    then malloc 110 into memory. 
+    then free the rest of the pointers. 
+
+    Reason: Workload D is to test whether malloc can handle
+    merging 3 consecutive freed memories. 
+    Allocating 110 bytes also tests the edge case whereby 
+    there is enough space to allocate bytes, but not enough
+    space to split the space into two blocks.
+
+2. Workload E
+
+    randomly pick size from 1 to 100 for 35 times
+    randomly pick between mallocing each randomly picked size 
+    OR freeing one of the sizes
+    (Note: each of the 35 mallocs store the pointers into an array)
+    once sizes are picked an allocated 35 times, free until all sizes are freed. 
+
+    Reason: developed on top of workload C. the purpose is to malloc 
+    and free memories with random sizes. Since the maximum that the 35 times
+    can pick is 35 * 100 = 3500, so 3500 + 35 * sizeof (Metadata) = 3500 + 35 * 16 = 4060. 
+    Since 4060 < 4096, so there is enough space in the memory array to run Workload E. 
+
+3. Workload F
+
+    allocate full 4096 bytes with 32 malloc (8)
+    free from two ends till freeing everything
+
+    Reason: allocate all the memory space to check whether the memory is able to
+    be fully loaded. 
+    Freeing from two ends test for the edge cases of freeing the two ends, also 
+    merging freed blocks from both sides
+
+
