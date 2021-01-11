@@ -21,14 +21,17 @@ whether the memory is freed or not, and pointer to the next metadata
 
 # Testcases:
 
-Workload A: 
+Workload A
+
     malloc() 1 byte and immediately free it - do this 120 times
     
-Workload B: 
+Workload B
+
     malloc() 1 byte, store the pointer in an array - do this 120 times.
     Once malloc()ed 120 byte chunks, then free() the 120 1 byte pointers one by one.
     
-Workload C: 
+Workload C
+
     240 times, randomly choose between a 1 byte malloc() or free()ing one of the malloc()ed pointers
     Keep track of each operation so that eventually malloc() 120 bytes, in total
     Keep track of each operation so that eventually free() all pointers
